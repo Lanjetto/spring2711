@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 public class BeanConfig {
 
     @Bean
-    public DataSource dataSources() {
+    public DataSource dataSource() {
         return new DriverManagerDataSource(
                 "jdbc:h2:mem:testdb;" +
                         "DB_CLOSE_DELAY=-1;" +
