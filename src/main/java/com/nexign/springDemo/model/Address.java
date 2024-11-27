@@ -1,7 +1,6 @@
 package com.nexign.springDemo.model;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -9,11 +8,14 @@ import java.util.Objects;
 @Component
 //@PropertySource("classpath:application.properties")
 public class Address {
-    @Value("${address.street}")
     private String street;
-    @Value("${address.city}")
+
     private String city;
 
+    public Address(@Value("${address.street}")String street,@Value("${address.city}") String city) {
+        this.street = street;
+        this.city = city;
+    }
 
     public String street() {
         return street;

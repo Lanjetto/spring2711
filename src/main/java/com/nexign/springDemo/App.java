@@ -2,6 +2,7 @@ package com.nexign.springDemo;
 
 
 import com.nexign.springDemo.config.BeanConfig;
+import com.nexign.springDemo.model.User;
 import com.nexign.springDemo.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -13,6 +14,8 @@ public class App {
         UserService userService = context.getBean(UserService.class);
         userService.addUser();
         userService.addUser();
+        System.out.println(userService.getUser(1));
+        System.out.println(userService.getUser(2));
 
 
     }

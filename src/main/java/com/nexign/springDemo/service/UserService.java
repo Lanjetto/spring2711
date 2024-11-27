@@ -19,4 +19,8 @@ public class UserService {
     public void addUser() {
         System.out.println(userDAO.addUser(user));
     }
+
+    public User getUser(int id) {
+        return userDAO.getUser(id);
+    }
 }

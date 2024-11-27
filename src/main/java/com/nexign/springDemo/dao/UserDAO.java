@@ -5,6 +5,7 @@ import com.nexign.springDemo.model.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -38,10 +39,12 @@ public class UserDAO {
     }
 
     public User getUser(int id) {
-        jdbcTemplate.execute("""
-                select * from users where id = ?
-                """);
-        return ;
+        String sql = "select * from users where id = " + id;
+        RowMapper<User> rowMapper = (rs, rowNum) -> {
+            Address address = new Address(rs.getString("city"), rs.getString("street"));
+            return new User(rs.getInt("id"), address);
+        };
+        return jdbcTemplate.queryForObject(sql, rowMapper);
     }
 
 }

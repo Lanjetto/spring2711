@@ -7,10 +7,16 @@ import org.springframework.stereotype.Component;
 public class User {
 
     private Address address;
+    private int id;
 
     @Autowired
     public User(Address address) {
+        this(0, address);
+    }
+
+    public User(int id, Address address) {
         this.address = address;
+        this.id = id;
     }
 
     public Address getAddress() {
@@ -24,8 +30,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "address=" + address +
-                '}';
+               "address=" + address +
+               ", id=" + id +
+               '}';
     }
     //IoC <- DI
 }
