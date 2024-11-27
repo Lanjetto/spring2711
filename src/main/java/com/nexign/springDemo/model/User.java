@@ -1,5 +1,8 @@
 package com.nexign.springDemo.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +22,9 @@ public class User {
         this.id = id;
     }
 
+    public User() {
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -27,12 +33,13 @@ public class User {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-               "address=" + address +
-               ", id=" + id +
-               '}';
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     //IoC <- DI
 }

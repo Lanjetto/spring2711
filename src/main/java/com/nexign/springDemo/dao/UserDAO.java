@@ -3,17 +3,19 @@ package com.nexign.springDemo.dao;
 import com.nexign.springDemo.model.Address;
 import com.nexign.springDemo.model.User;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-@Component
+//@Component
 public class UserDAO {
     private JdbcTemplate jdbcTemplate;
-    @Autowired
+//    @Autowired
     private DataSource dataSource;
 
     @PostConstruct
@@ -27,15 +29,21 @@ public class UserDAO {
             """);
     }
 
-    public int addUser(User user) {
+
+    public long addUser(User user) throws SQLException {
         Address address = user.getAddress();
-        String city = address.city();
-        String street = address.street();
+        String city = address.getCity();
+        String street = address.getStreet();
 
-        int update = jdbcTemplate.update("insert into users(city, street) values(?, ?)",
-                city, street);
-
-        return update;
+        Connection connection = jdbcTemplate.getDataSource().getConnection();
+        PreparedStatement preparedStatement =
+                connection.prepareStatement("insert into users(city, street) values(?, ?)",
+                                                Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, city);
+        preparedStatement.setString(2, street);
+        preparedStatement.executeUpdate();
+        preparedStatement.getGeneratedKeys().next();
+        return preparedStatement.getGeneratedKeys().getLong(1);
     }
 
     public User getUser(int id) {

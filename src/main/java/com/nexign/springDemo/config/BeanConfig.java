@@ -13,16 +13,16 @@ import javax.sql.DataSource;
 @PropertySource("classpath:application.properties")
 public class BeanConfig {
 
-    @Bean
-    public DataSource dataSource() {
-        return new DriverManagerDataSource(
-                "jdbc:h2:mem:testdb;" +
-                        "DB_CLOSE_DELAY=-1;" +
-                        "DB_CLOSE_ON_EXIT=false;" +
-                        "DATABASE_TO_UPPER=false;",
-                "sa",
-                ""
-        );
-    }
+//    @Bean
+//    public DataSource dataSource() {
+//        return new DriverManagerDataSource(
+//                "jdbc:h2:mem:testdb;" +
+//                        "DB_CLOSE_DELAY=-1;" +
+//                        "DB_CLOSE_ON_EXIT=false;" +
+//                        "DATABASE_TO_UPPER=false;",
+//                "sa",
+//                ""
+//        );
+//    }
 
 }
