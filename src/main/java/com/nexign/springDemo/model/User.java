@@ -1,32 +1,31 @@
 package com.nexign.springDemo.model;
 
-import com.nexign.springDemo.annotation.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class User {
-    private String name;
-    private int age;
-    @Inject
+
     private Address address;
 
-//    public User(String name, int age, Address address) {
-//        this.name = "name";
-//        this.age = 12;
-//        this.address = address;
-//    }
+    @Autowired
+    public User(Address address) {
+        this.address = address;
+    }
 
-    public User() {
-        this.name = "name";
-        this.age = 12;
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", address=" + address +
+                "address=" + address +
                 '}';
     }
-
     //IoC <- DI
 }
