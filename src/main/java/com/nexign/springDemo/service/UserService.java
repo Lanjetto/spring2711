@@ -28,7 +28,7 @@ public class UserService {
     }
 
     public User getUser(Long id) {
-        UserEntity userEntity = userRepository.findById(id).orElseThrow();
+        UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         Address address = new Address(userEntity.getCity(), userEntity.getStreet());
         return new User(address);
     }

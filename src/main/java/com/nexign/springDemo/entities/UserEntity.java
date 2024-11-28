@@ -11,6 +11,7 @@ public class UserEntity {
     private Long id;
     private String city;
     private String street;
+    @Enumerated(EnumType.STRING)
     private CityType cityType;
 
     public UserEntity() {
